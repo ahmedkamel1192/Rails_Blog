@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @article.title %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @article.content %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @article.user.email %>
+</p>
+
+<p>
+  <strong>Favouriets Count:</strong>
+  <%= @article.count %>
+</p>
+
+<%if !@article.likers.include? @current_user%>
+<%= link_to 'Add to favorites', add_favourite_article_path(@article) %>
+<%else%>
+<%= link_to 'Remove from favorites', remove_favourite_article_path(@article) %>
+<%end%>
+<%if @current_user.id == @article.user_id%>
+<%= link_to 'Edit', edit_article_path(@article) %> |
+<%end%>
+<%= link_to 'Back', articles_path %>
