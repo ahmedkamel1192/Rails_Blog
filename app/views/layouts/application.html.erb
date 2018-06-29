@@ -13,6 +13,8 @@
   <% if !@current_user %>
   <strong><%= link_to'Singin',signin_path%></strong>
   <%else%>
+    <strong><%= link_to'My favourites',my_favourite_articles_path%></strong>
+
   <strong><%= link_to'Singout',signout_path%></strong>
   <%end%>
     <%= yield %>

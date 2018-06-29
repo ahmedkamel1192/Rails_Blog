@@ -1,0 +1,9 @@
+ <% @favourites.each do |article| %>
+    <%=article.user.email%>
+    <br>
+    <%=article.title%>
+    <br>
+    <%=article.content%>
+    <br>
+    <hr>
+ <%end%>

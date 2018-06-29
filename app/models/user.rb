@@ -4,7 +4,7 @@ class User < ApplicationRecord
     validates_format_of :email, :with =>/.+@[a-zA-Z]+\..+/i	
    
     has_many :favourites
-    has_many :favourite_articles, :through => :favourites, :class_name => 'Article'
-    has_many :written_articles , :class_name => 'Article'
+    has_many :favourite_articles, :through => :favourites, :source => :article
+    has_many :written_articles , :source => :article
   
 end

@@ -63,7 +63,11 @@ class ArticlesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def my_favourite
+    user=User.find(@current_user.id)
+    @favourites = user.favourite_articles
 
+  end
   def add_favourite
     article=Article.find(params[:id])
     article.likers<<@current_user
@@ -71,7 +75,7 @@ class ArticlesController < ApplicationController
     article.save
     redirect_to article_path
   end
-
+  
   def remove_favourite
     article=Article.find(params[:id])
     article.likers.delete(@current_user)
@@ -96,6 +100,8 @@ class ArticlesController < ApplicationController
         redirect_to ('/signin')
       end
     end
+
+    
 
     def allowed_user
       if @current_user.id != @article.user_id
