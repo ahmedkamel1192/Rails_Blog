@@ -1,4 +1,6 @@
 class SignupController < ApplicationController
+    before_action :authenticate_user
+   
     def new
     end
   
@@ -7,7 +9,7 @@ class SignupController < ApplicationController
   
       if @user.save
         cookies.signed[:user_id] = @user.id
-        redirect_to ('/')
+        redirect_to ('/ ')
       else
         render :new
       end
