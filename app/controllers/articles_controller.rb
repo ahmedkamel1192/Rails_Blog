@@ -63,11 +63,7 @@ class ArticlesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  def my_favourite
-    user=User.find(@current_user.id)
-    @favourites = user.favourite_articles
-
-  end
+  
   def add_favourite
     article=Article.find(params[:id])
     article.likers<<@current_user
