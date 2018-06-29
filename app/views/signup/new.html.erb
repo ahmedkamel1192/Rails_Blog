@@ -1,0 +1,18 @@
+<div class="container">  
+  <div class="row">
+    <div class="col-sm-offset-3 col-sm-6" style="margin-top: 100px">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+    <strong>Sign Up</strong>
+        </div> <br>
+        <div class="panel-body">
+          <%= form_for :user do |f| %>
+            Email: <%= f.email_field :email, class: "input-lg" %> <br>
+            Password: <%= f.password_field :password, class: "input-lg" %> <br>
+            <%= f.submit "Register", class: "btn btn-block btn-lg btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>  
