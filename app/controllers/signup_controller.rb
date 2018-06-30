@@ -11,7 +11,7 @@ class SignupController < ApplicationController
         cookies.signed[:user_id] = @user.id
         redirect_to ('/ ')
       else
-        render :new
+        redirect_back fallback_location: new , notice: 'Email already Exist'
       end
     end
   

@@ -1,18 +1,20 @@
 <div class="container">  
- <strong><%= link_to'Signup',signup_path%></strong>
-
   <div class="row">
-    <div class="col-sm-offset-3 col-sm-6" style="margin-top: 100px">
+    <div class="col-sm-offset-3 col-sm-6" style="margin-top: 10px">
       <div class="panel panel-default">
         <div class="panel-heading">
-    <strong>Signin</strong>
-        </div> <br>
+    <h1>Signin</h1>
+
+<br> <strong style="color:red"><%= notice %> </strong>
+         </div> <br>
         <div class="panel-body">
           <%= form_for :user do |f| %>
             Email: <%= f.email_field :email, class: "input-lg" %> <br>
             Password: <%= f.password_field :password, class: "input-lg" %> <br>
             <%= f.submit "signin", class: "btn btn-block btn-lg btn-primary" %>
+             <strong>OR</strong> <%= link_to'Signup',signup_path%>
           <% end %>
+           
         </div>
       </div>
     </div>
