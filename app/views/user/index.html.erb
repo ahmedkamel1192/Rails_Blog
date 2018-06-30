@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Users</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>user</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+      <%if @current_user.id!=user.id%>
+        <td><%= user.email%></td>
+        <td><%= user.id%></td>
+        <%if !@current_user.followees.include? user%>
+        <td><%= link_to 'follow', follow_path(:id=>user.id)%> </td>
+        <%else%> 
+        <td><%= link_to 'unfollow', unfollow_path(:id=>user.id)%> </td> 
+        <%end%>
+        <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

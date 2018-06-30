@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_29_184030) do
+ActiveRecord::Schema.define(version: 2018_06_30_140841) do
 
   create_table "articles", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "title"
@@ -30,11 +30,20 @@ ActiveRecord::Schema.define(version: 2018_06_29_184030) do
     t.index ["user_id"], name: "index_favourites_on_user_id"
   end
 
+  create_table "follows", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "follower_id"
+    t.integer "followee_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "count_followers", default: 0
+    t.integer "count_followees", default: 0
   end
 
   add_foreign_key "favourites", "articles"

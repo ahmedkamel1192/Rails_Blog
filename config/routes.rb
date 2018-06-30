@@ -4,9 +4,6 @@ Rails.application.routes.draw do
         get 'add_favourite'
         get 'remove_favourite'
      end  
-    #  collection do
-    #     get 'my_favourite'
-    #  end
    end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get "signup" => "signup#new"
@@ -15,5 +12,7 @@ Rails.application.routes.draw do
   post "signin" => "session#create"
   get "signout" => "session#destroy"
   get "favourite_articles" => "user#my_favourite"
-  # root to: '/'
+  get "all_user" => "user#index"
+  get "follow" => "user#follow"
+  get "unfollow" => "user#unfollow"
 end

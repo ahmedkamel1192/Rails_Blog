@@ -13,9 +13,12 @@
   <% if !@current_user %>
   <strong><%= link_to'Singin',signin_path%></strong>
   <%else%>
-    <strong><%= link_to'My favourites', favourite_articles_path%></strong>
-
+  <strong><%= link_to'My favourites', favourite_articles_path%></strong>
   <strong><%= link_to'Singout',signout_path%></strong>
+  <hr>
+  <strong>Following<%= @current_user.count_followees %></strong>
+  <strong>My Followers<%= @current_user.count_followers %></strong>
+
   <%end%>
     <%= yield %>
   </body>
