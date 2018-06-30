@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   before_action :current_user
-  before_action :authorized_user , only: %i[create destroy edit new ]
+  before_action :authorized_user , only: %i[index create destroy edit new ]
   before_action :allowed_user , only: %i[destroy update]
 
   # GET /articles
@@ -69,7 +69,7 @@ class ArticlesController < ApplicationController
     article.likers<<@current_user
     article.count+=1
     article.save
-    redirect_to article_path
+    redirect_back fallback_location: article_path , notice: "Article #{article.title} successfully added to favourites."
   end
   
   def remove_favourite
@@ -77,7 +77,7 @@ class ArticlesController < ApplicationController
     article.likers.delete(@current_user)
     article.count-=1
     article.save
-    redirect_to article_path
+    redirect_back fallback_location: article_path , notice: "Article #{article.title} successfully removed from favourites."
   end
 
   private

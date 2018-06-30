@@ -10,18 +10,23 @@
   </head>
 
   <body>
+  <% if @current_user %>
   <strong><%= link_to'Users', all_user_path%></strong>
   <strong style="margin-left:25px"><%= link_to'Articles', articles_path%></strong>
-
-  <hr>
+<hr>
+<%end%>
+  
   <% if !@current_user %>
-  <strong><%= link_to'Signin',signin_path%></strong>
+  <strong> Join Us NOW !!</strong>
   <%else%>
+
   <strong><%= link_to'My favourites', favourite_articles_path%></strong>
   <strong style="margin-left:25px"><%= link_to'Signout',signout_path%></strong>
+    <strong style="margin-left:80px"><%= @current_user.email %></strong>
+
   <hr>
-  <strong>Following: <%= @current_user.count_followees %></strong>
-  <strong style="margin-left:25px">My Followers: <%= @current_user.count_followers %></strong>
+  <strong><%=link_to 'Following',my_followed_list_path%> : <%= @current_user.count_followees %></strong>
+  <strong style="margin-left:25px"><%=link_to 'My Followers',my_followers_list_path%> : <%= @current_user.count_followers %></strong>
   <strong style="margin-left:25px"><%= link_to 'Followees Articles',followees_articles_path %></strong>
 
   
@@ -30,3 +35,4 @@
     <%= yield %>
   </body>
 </html>
+ 

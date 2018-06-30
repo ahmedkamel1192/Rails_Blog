@@ -21,9 +21,9 @@
 </p>
 
 <%if !@article.likers.include? @current_user%>
-<%= link_to 'Add to favorites', add_favourite_article_path(@article) %>
+<%= link_to 'Add to favourites', add_favourite_article_path(@article) %>
 <%else%>
-<%= link_to 'Remove from favorites', remove_favourite_article_path(@article) %>
+<%= link_to 'Remove from favourites', remove_favourite_article_path(@article) %>
 <%end%>
 <%if @current_user.id == @article.user_id%>
 <%= link_to 'Edit', edit_article_path(@article) %> |

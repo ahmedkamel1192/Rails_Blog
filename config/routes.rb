@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get "follow" => "user#follow"
   get "unfollow" => "user#unfollow"
   get "followees_articles" => "user#my_followees_articles"
+  get "my_followers_list" => "user#my_followers_list"
+  get "my_followed_list" => "user#my_followed_list"
 
 
   root to: 'articles#index'

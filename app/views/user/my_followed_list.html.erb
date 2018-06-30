@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Followed List</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Action</th>
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @followed_list.each do |user| %>
+      <tr>    
+        <td><%= user.email%></td> 
+        <td><%= link_to 'unfollow', unfollow_path(:id=>user.id)%> </td> 
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

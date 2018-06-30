@@ -24,16 +24,16 @@ class UserController < ApplicationController
         user.save
         @current_user.save
         respond_to do |format|
-          format.html { redirect_to all_user_url, notice: 'Followed Succesfully' }
+          format.html { redirect_back fallback_location: all_user_url, notice: 'Followed Succesfully' }
         end
       else
         respond_to do |format|
-          format.html { redirect_to all_user_url, notice: "You Can't Follow your self" }
+          format.html { redirect_back fallback_location: all_user_url, notice: "You Can't Follow your self" }
         end
           end
     else
       respond_to do |format|
-        format.html { redirect_to all_user_url, notice: 'User not found' }
+        format.html { redirect_back fallback_location: all_user_url, notice: 'User not found' }
       end
     end
   end
@@ -49,16 +49,16 @@ class UserController < ApplicationController
           user.save
           @current_user.save
           respond_to do |format|
-            format.html { redirect_to all_user_url, notice: 'Unfollowed Succesfully' }
+            format.html { redirect_back fallback_location: all_user_url, notice: 'Unfollowed Succesfully' }
           end
       else
           respond_to do |format|
-            format.html { redirect_to all_user_url, notice: "You Can't Unfollow your self" }
+            format.html { redirect_back fallback_location: all_user_url, notice: "You Can't Unfollow your self" }
           end
       end
     else
           respond_to do |format|
-            format.html { redirect_to all_user_url, notice: 'User not found' }
+            format.html { redirect_back fallback_location: all_user_url, notice: 'User not found' }
           end
     end
   end
@@ -66,6 +66,14 @@ class UserController < ApplicationController
 
   def my_followees_articles
     @followees=@current_user.followees
+  end
+
+  def my_followers_list
+    @followers_list=@current_user.followers
+  end
+
+  def my_followed_list
+    @followed_list=@current_user.followees
   end
 
   private
