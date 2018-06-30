@@ -1,12 +1,11 @@
 class User < ApplicationRecord
     has_secure_password
+    validates :password, presence: true
     validates :email, presence: true, uniqueness: true
     validates_format_of :email, :with =>/.+@[a-zA-Z]+\..+/i	
    
     has_many :favourites
     has_many :favourite_articles, :through => :favourites, :source => :article
-    # has_many :written_articles , :source => :article
-
     has_many :articles
     #Has_many | Has_many — Self Join Table
 

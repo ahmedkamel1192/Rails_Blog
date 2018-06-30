@@ -15,7 +15,6 @@
       <tr>
       <%if @current_user.id!=user.id%>
         <td><%= user.email%></td>
-        <td><%= user.id%></td>
         <%if !@current_user.followees.include? user%>
         <td><%= link_to 'follow', follow_path(:id=>user.id)%> </td>
         <%else%> 

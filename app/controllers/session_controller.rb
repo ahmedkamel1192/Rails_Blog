@@ -11,6 +11,8 @@ class SessionController < ApplicationController
         if @user.present? && @user.authenticate(user_params[:password])
           cookies.permanent.signed[:user_id] = @user.id
           redirect_to ('/')
+        elsif !@user.present?
+          redirect_back fallback_location: new , notice: 'Un-regeistered user'
         else
           redirect_back fallback_location: new , notice: 'Invalid Credentials'
         end
