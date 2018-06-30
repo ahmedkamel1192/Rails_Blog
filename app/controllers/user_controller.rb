@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UserController < ApplicationController
-  before_action :current_user ,:authorized_user
+  before_action :current_user , :authorized_user
 
   def index
     @users = User.all
@@ -18,10 +18,10 @@ class UserController < ApplicationController
       user = User.find(params[:id])
       if user.id != @current_user.id
         user.followers << @current_user
-        @current_user.count_followees+=1
+        @current_user.count_followees += 1
+        user.count_followers += 1
+        user.save
         @current_user.save
-        user.count_followers+=1
-        user.save        
         respond_to do |format|
           format.html { redirect_back fallback_location: all_user_url, notice: 'Followed Succesfully' }
         end
