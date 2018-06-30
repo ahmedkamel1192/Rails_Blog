@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
-    # protected
+    before_action :cors_set_access_control_headers
 
-  def authenticate_user
+    def authenticate_user
     if (current_user.present?) 
        redirect_to('/')
     end
@@ -10,5 +10,9 @@ class ApplicationController < ActionController::Base
   def current_user
     @current_user ||= User.find_by(id: cookies.signed[:user_id])
   end
+  
+  def cors_set_access_control_headers
+  		headers['Access-Control-Allow-Origin'] = '*'
+	end
 
 end
