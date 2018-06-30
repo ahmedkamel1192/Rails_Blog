@@ -20,7 +20,7 @@
    <strong> Join Us NOW !!</strong>
    <%else%>
    <strong><%= link_to'My favourites', favourite_articles_path%></strong>
-   <strong style="margin-left:25px"><%= link_to'Signout',signout_path%></strong>
+   <strong style="margin-left:25px"><%= link_to'Signout',signout_path,method: :delete, data: { confirm: 'Are you sure?' }%></strong>
    <strong style="margin-left:80px"><%= @current_user.email %></strong>
    <hr>
    <strong><%=link_to 'Following',my_followed_list_path%> : <%= @current_user.count_followees %></strong>

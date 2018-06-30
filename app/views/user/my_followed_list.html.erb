@@ -16,7 +16,7 @@
     <% @followed_list.each do |user| %>
       <tr>    
         <td><%= user.email%></td> 
-        <td><%= link_to 'unfollow', unfollow_path(:id=>user.id)%> </td> 
+        <td><%= link_to 'unfollow', unfollow_path(:id=>user.id),method: :delete, data: { confirm: 'Are you sure?' }%> </td> 
       </tr>
     <% end %>
   </tbody>

@@ -18,9 +18,9 @@
        <%if @current_user.id!=user.id%>
         <td><%= user.email%></td> 
         <%if !@current_user.followees.include? user%>
-        <td><%= link_to 'follow', follow_path(:id=>user.id)%> </td>
+        <td><%= link_to 'follow', follow_path(:id=>user.id),method: :put%> </td>
         <%else%> 
-        <td><%= link_to 'unfollow', unfollow_path(:id=>user.id)%> </td> 
+        <td><%= link_to 'unfollow', unfollow_path(:id=>user.id),method: :delete, data: { confirm: 'Are you sure?' }%> </td> 
         <%end%>
       </tr>
     <% end %>
