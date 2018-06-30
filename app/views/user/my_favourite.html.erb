@@ -1,9 +1,7 @@
+ <hr>
  <% @favourites.each do |article| %>
-    <%=article.user.email%>
-    <br>
-    <%=article.title%>
-    <br>
-    <%=article.content%>
-    <br>
+   <strong>Content:</strong> <%=article.content%> <br>
+   <strong stlye="margin-left:30px">Title:</strong> <%=article.title%> <br>
+   <strong stlye="margin-left:30px">Created By:</strong>  <%=article.user.email%> 
     <hr>
  <%end%>

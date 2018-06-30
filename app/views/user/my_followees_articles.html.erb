@@ -1,0 +1,10 @@
+  <%@followees.each do |followee| %>
+  <%followee.articles.each do |article| %>
+  <strong> Title: </strong><%=article.title%>  
+  <br>
+  <strong> content: </strong><%=article.content%> 
+  <br>
+  <strong> created_by: </strong><%=article.user.email%>  
+  <hr> 
+  <%end%>
+  <%end%>

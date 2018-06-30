@@ -10,15 +10,22 @@
   </head>
 
   <body>
+  <strong><%= link_to'Users', all_user_path%></strong>
+  <strong style="margin-left:25px"><%= link_to'Articles', articles_path%></strong>
+
+  <hr>
   <% if !@current_user %>
-  <strong><%= link_to'Singin',signin_path%></strong>
+  <strong><%= link_to'Signin',signin_path%></strong>
   <%else%>
   <strong><%= link_to'My favourites', favourite_articles_path%></strong>
-  <strong><%= link_to'Singout',signout_path%></strong>
+  <strong style="margin-left:25px"><%= link_to'Signout',signout_path%></strong>
   <hr>
-  <strong>Following<%= @current_user.count_followees %></strong>
-  <strong>My Followers<%= @current_user.count_followers %></strong>
+  <strong>Following: <%= @current_user.count_followees %></strong>
+  <strong style="margin-left:25px">My Followers: <%= @current_user.count_followers %></strong>
+  <strong style="margin-left:25px"><%= link_to 'Followees Articles',followees_articles_path %></strong>
 
+  
+<hr>
   <%end%>
     <%= yield %>
   </body>

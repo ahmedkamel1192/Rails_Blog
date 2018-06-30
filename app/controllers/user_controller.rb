@@ -61,7 +61,11 @@ class UserController < ApplicationController
             format.html { redirect_to all_user_url, notice: 'User not found' }
           end
     end
+  end
 
+
+  def my_followees_articles
+    @followees=@current_user.followees
   end
 
   private

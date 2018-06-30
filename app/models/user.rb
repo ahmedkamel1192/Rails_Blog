@@ -5,8 +5,9 @@ class User < ApplicationRecord
    
     has_many :favourites
     has_many :favourite_articles, :through => :favourites, :source => :article
-    has_many :written_articles , :source => :article
-    
+    # has_many :written_articles , :source => :article
+
+    has_many :articles
     #Has_many | Has_many — Self Join Table
 
     has_many :follower_follows, foreign_key: :followee_id, class_name: "Follow"
