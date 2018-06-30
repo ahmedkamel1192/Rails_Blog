@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class UserController < ApplicationController
-  before_action :current_user
-  before_action :authorized_user
+  before_action :current_user ,:authorized_user
 
   def index
     @users = User.all
@@ -82,12 +81,5 @@ class UserController < ApplicationController
     redirect_to '/signin' if @current_user.blank?
     end
 
-  def allowed_user
-    if @current_user.id != @article.user_id
-      respond_to do |format|
-        format.html { redirect_to articles_path, notice: 'You are not authorized' }
-      end
-    end
-    end
 end
 

@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(id: cookies.signed[:user_id])
   end
   
+  #allow access to heroku
   def cors_set_access_control_headers
   		headers['Access-Control-Allow-Origin'] = '*'
 	end

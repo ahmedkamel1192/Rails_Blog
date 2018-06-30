@@ -1,8 +1,7 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
-  before_action :current_user
-  before_action :authorized_user , only: %i[index create destroy edit new ]
-  before_action :allowed_user , only: %i[destroy update]
+  before_action :set_article, only: [:show, :edit, :update, :destroy, :add_favourite, :remove_favourite]
+  before_action :current_user ,:authorized_user
+  before_action :allowed_user , only: %i[destroy update edit]
 
   # GET /articles
   # GET /articles.json
@@ -65,19 +64,17 @@ class ArticlesController < ApplicationController
   end
   
   def add_favourite
-    article=Article.find(params[:id])
-    article.likers<<@current_user
-    article.count+=1
-    article.save
-    redirect_back fallback_location: article_path , notice: "Article #{article.title} successfully added to favourites."
+    @article.likers<<@current_user
+    @article.count+=1
+    @article.save
+    redirect_back fallback_location: article_path , notice: "Article #{@article.title} successfully added to favourites."
   end
   
   def remove_favourite
-    article=Article.find(params[:id])
-    article.likers.delete(@current_user)
-    article.count-=1
-    article.save
-    redirect_back fallback_location: article_path , notice: "Article #{article.title} successfully removed from favourites."
+    @article.likers.delete(@current_user)
+    @article.count-=1
+    @article.save
+    redirect_back fallback_location: article_path , notice: "Article #{@article.title} successfully removed from favourites."
   end
 
   private
@@ -98,7 +95,6 @@ class ArticlesController < ApplicationController
     end
 
     
-
     def allowed_user
       if @current_user.id != @article.user_id
          respond_to do |format|
