@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   resources :articles do 
      member do
-        put 'add_favourite'
-        delete 'remove_favourite'
+        put 'favourites'
+        delete 'favourites'
      end  
    end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

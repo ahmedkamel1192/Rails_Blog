@@ -9,9 +9,9 @@
   <strong> created_by: </strong><%=article.user.email%> 
   <br>
   <%if !article.likers.include? @current_user%>
-  <strong><%= link_to 'Add to favourites', add_favourite_article_path(article) ,method: :put%> </strong>
+  <strong><%= link_to 'Add to favourites', favourites_article_path(article) ,method: :put%> </strong>
   <%else%>
-  <strong><%= link_to 'Remove from favourites', remove_favourite_article_path(article),method: :delete, data: { confirm: 'Are you sure to remove it from favourite?' }%></strong>
+  <strong><%= link_to 'Remove from favourites', favourites_article_path(article),method: :delete, data: { confirm: 'Are you sure to remove it from favourite?' }%></strong>
   <%end%> 
   <br>
   <strong>Favourite Count : </strong><%=article.count %>

@@ -1,6 +1,6 @@
 class SessionController < ApplicationController
     before_action :authenticate_user , except: :destroy
-   
+    skip_before_action :verify_authenticity_token  , :only => [:create ]
     def new
         # render the login form
       end
@@ -10,7 +10,10 @@ class SessionController < ApplicationController
     
         if @user.present? && @user.authenticate(user_params[:password])
           cookies.permanent.signed[:user_id] = @user.id
-          redirect_to ('/')
+          respond_to do |format|
+            format.html { redirect_to ('/') }
+            format.json { }
+          end
         elsif !@user.present?
           redirect_back fallback_location: new , notice: 'Un-regeistered user'
         else

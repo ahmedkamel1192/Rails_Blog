@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy, :add_favourite, :remove_favourite]
+  before_action :set_article, only: [:show, :edit, :update, :destroy, :add_favourite, :remove_favourite, :favourites]
   before_action :current_user ,:authorized_user
   before_action :allowed_user , only: %i[destroy update edit]
 
@@ -63,18 +63,18 @@ class ArticlesController < ApplicationController
     end
   end
   
-  def add_favourite
-    @article.likers<<@current_user
-    @article.count+=1
-    @article.save
-    redirect_back fallback_location: article_path , notice: "Article #{@article.title} successfully added to favourites."
-  end
-  
-  def remove_favourite
-    @article.likers.delete(@current_user)
-    @article.count-=1
-    @article.save
-    redirect_back fallback_location: article_path , notice: "Article #{@article.title} successfully removed from favourites."
+  def favourites
+    if @article.likers.include? @current_user
+        @article.likers.delete(@current_user)
+        @article.count-=1
+        redirect_back fallback_location: article_path , notice: "Article #{@article.title} successfully removed from favourites."
+    else
+        @article.likers<<@current_user
+        @article.count+=1
+        @article.save
+        redirect_back fallback_location: article_path , notice: "Article #{@article.title} successfully added to favourites."
+    end
+    @article.save  
   end
 
   private
