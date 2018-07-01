@@ -25,8 +25,13 @@ Rails.application.routes.draw do
     namespace :v1 do
       post "signup" => "signup#create"
       get "users" => "user#index"
-      post "signin" => "authentication#authenticate" ###
-
+      post "signin" => "authentication#authenticate" 
+      get "favourite_articles" => "user#my_favourite"
+      put "follow" => "user#follow"
+      delete "unfollow" => "user#unfollow"
+      get "followees_articles" => "user#my_followees_articles"
+      get "my_followers_list" => "user#my_followers_list"
+      get "my_followed_list" => "user#my_followed_list"
     end
   end
 

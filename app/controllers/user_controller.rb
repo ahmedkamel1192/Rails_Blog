@@ -17,6 +17,7 @@ class UserController < ApplicationController
     if user.count > 0
       user = User.find(params[:id])
       if user.id != @current_user.id
+        if !user.followers.include? @current_user
         user.followers << @current_user
         @current_user.count_followees += 1
         user.count_followers += 1
@@ -27,9 +28,15 @@ class UserController < ApplicationController
         end
       else
         respond_to do |format|
+          format.html { redirect_back fallback_location: all_user_url, notice: "already Followed" }
+         end
+      end
+
+      else
+        respond_to do |format|
           format.html { redirect_back fallback_location: all_user_url, notice: "You Can't Follow your self" }
         end
-          end
+      end
     else
       respond_to do |format|
         format.html { redirect_back fallback_location: all_user_url, notice: 'User not found' }
@@ -42,6 +49,7 @@ class UserController < ApplicationController
     if user.count > 0
       user = User.find(params[:id])
       if user.id != @current_user.id
+        if user.followers.include? @current_user
           user.followers.delete(@current_user)
           @current_user.count_followees -= 1
           user.count_followers -= 1
@@ -50,6 +58,11 @@ class UserController < ApplicationController
           respond_to do |format|
             format.html { redirect_back fallback_location: all_user_url, notice: 'Unfollowed Succesfully' }
           end
+        else
+          respond_to do |format|
+            format.html { redirect_back fallback_location: all_user_url, notice: "already Unfollowed" }
+          end
+      end
       else
           respond_to do |format|
             format.html { redirect_back fallback_location: all_user_url, notice: "You Can't Unfollow your self" }
