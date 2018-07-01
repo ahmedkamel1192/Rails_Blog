@@ -23,6 +23,12 @@ Rails.application.routes.draw do
    # Api Routes
    namespace :api do
     namespace :v1 do
+      resources :articles do 
+        member do
+           put 'favourites'
+           delete 'favourites'
+        end  
+      end
       post "signup" => "signup#create"
       get "users" => "user#index"
       post "signin" => "authentication#authenticate" 
