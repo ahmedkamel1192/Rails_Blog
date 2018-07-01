@@ -19,5 +19,17 @@ Rails.application.routes.draw do
   get "my_followers_list" => "user#my_followers_list"
   get "my_followed_list" => "user#my_followed_list"
 
+
+   # Api Routes
+   namespace :api do
+    namespace :v1 do
+      post "signup" => "signup#create"
+      get "users" => "user#index"
+      post "signin" => "authentication#authenticate" ###
+
+    end
+  end
+
+
   root to: 'articles#index'
 end
