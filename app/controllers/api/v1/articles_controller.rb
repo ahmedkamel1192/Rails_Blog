@@ -48,30 +48,18 @@ class Api::V1::ArticlesController < Api::V1::ApplicationController
 
   end
   
-  def add_favourite
-    @article.likers<<@current_user
-    @article.count+=1
-    @article.save
-    redirect_back fallback_location: article_path , notice: "Article #{@article.title} successfully added to favourites."
-  end
   
-  def remove_favourite
-    @article.likers.delete(@current_user)
-    @article.count-=1
-    @article.save
-    redirect_back fallback_location: article_path , notice: "Article #{@article.title} successfully removed from favourites."
-  end
 
   def favourites
     if @article.likers.include? @current_user
         @article.likers.delete(@current_user)
         @article.count-=1
-        redirect_back fallback_location: article_path , notice: "Article #{@article.title} successfully removed from favourites."
+        render json: {data: @article , message: 'article is successfuly removed from favourite'}
     else
         @article.likers<<@current_user
         @article.count+=1
         @article.save
-        redirect_back fallback_location: article_path , notice: "Article #{@article.title} successfully added to favourites."
+        render json: {data: @article , message: 'article is successfuly added to favourite'}
     end
     @article.save  
   end
