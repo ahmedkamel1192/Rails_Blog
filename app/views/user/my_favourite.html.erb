@@ -3,5 +3,10 @@
    <strong>Content:</strong> <%=article.content%> <br>
    <strong stlye="margin-left:30px">Title:</strong> <%=article.title%> <br>
    <strong stlye="margin-left:30px">Created By:</strong>  <%=article.user.email%> 
+   <%if !article.likers.include? @current_user%>
+  <strong><%= link_to 'Add to favourites', favourites_article_path(article) ,method: :put%> </strong>
+  <%else%>
+  <strong><%= link_to 'Remove from favourites', favourites_article_path(article),method: :delete, data: { confirm: 'Are you sure to remove it from favourite?' }%></strong>
+  <%end%> 
     <hr>
  <%end%>

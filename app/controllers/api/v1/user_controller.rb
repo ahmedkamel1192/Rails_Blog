@@ -9,15 +9,15 @@ class Api::V1::UserController < Api::V1::ApplicationController
   end
 
   def my_favourite
-    user = User.find(@current_user.id)
-    @favourites = user.favourite_articles
+    # user = User.find(@current_user.id)
+    @favourites = @current_user.favourite_articles
     render json: @favourites
   end
 
   def follow
-    user = User.where(id: params[:id])
-    if user.count > 0
-      user = User.find(params[:id])
+      
+    user = User.find_by(id: params[:id])
+    if user
       if user.id != @current_user.id
         if !user.followers.include? @current_user
         user.followers << @current_user
@@ -39,9 +39,8 @@ class Api::V1::UserController < Api::V1::ApplicationController
   end
 
   def unfollow
-    user = User.where(id: params[:id])
-    if user.count > 0
-      user = User.find(params[:id])
+    user = User.find_by(id: params[:id])
+    if user
       if user.id != @current_user.id
         if user.followers.include? @current_user
           user.followers.delete(@current_user)

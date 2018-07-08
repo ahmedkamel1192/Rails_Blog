@@ -8,76 +8,73 @@ class UserController < ApplicationController
   end
 
   def my_favourite
-    user = User.find(@current_user.id)
-    @favourites = user.favourite_articles
+    # user = User.find(@current_user.id)
+    @favourites = @current_user.favourite_articles
   end
 
   def follow
-    user = User.where(id: params[:id])
-    if user.count > 0
-      user = User.find(params[:id])
+    # user = User.where(id: params[:id])
+    # if user.count > 0
+      
+    user = User.find_by(id: params[:id])
+    if user
       if user.id != @current_user.id
         if !user.followers.include? @current_user
-        user.followers << @current_user
-        @current_user.count_followees += 1
-        user.count_followers += 1
-        user.save
-        @current_user.save
-        respond_to do |format|
-          format.html { redirect_back fallback_location: all_user_url, notice: 'Followed Succesfully' }
+          user.followers << @current_user
+          @current_user.count_followees += 1
+          user.count_followers += 1
+          user.save
+          @current_user.save
+          notice="Followed Succesfully"   
+        else
+          notice="already Followed"
         end
       else
-        respond_to do |format|
-          format.html { redirect_back fallback_location: all_user_url, notice: "already Followed" }
-         end
-      end
-
-      else
-        respond_to do |format|
-          format.html { redirect_back fallback_location: all_user_url, notice: "You Can't Follow your self" }
-        end
+        notice="You Can't Follow your self"
       end
     else
-      respond_to do |format|
-        format.html { redirect_back fallback_location: all_user_url, notice: 'User not found' }
-      end
+     notice = "User not found"
+    end
+    respond_to do |format|
+      format.html { redirect_back fallback_location: all_user_url, notice: notice}
     end
   end
 
   def unfollow
-    user = User.where(id: params[:id])
-    if user.count > 0
-      user = User.find(params[:id])
-      if user.id != @current_user.id
-        if user.followers.include? @current_user
-          user.followers.delete(@current_user)
-          @current_user.count_followees -= 1
-          user.count_followers -= 1
-          user.save
-          @current_user.save
-          respond_to do |format|
-            format.html { redirect_back fallback_location: all_user_url, notice: 'Unfollowed Succesfully' }
+      user = User.find_by(id: params[:id])
+      if user
+        if user.id != @current_user.id
+          if user.followers.include? @current_user
+            user.followers.delete(@current_user)
+            @current_user.count_followees -= 1
+            user.count_followers -= 1
+            user.save
+            @current_user.save
+            notice="Unfollowed Succesfully"
+          else
+            notice="already Unfollowed"         
           end
         else
-          respond_to do |format|
-            format.html { redirect_back fallback_location: all_user_url, notice: "already Unfollowed" }
-          end
+          notice="You Can't Unfollow your self" 
+        end
+      else  
+        notice="User not found"
       end
-      else
-          respond_to do |format|
-            format.html { redirect_back fallback_location: all_user_url, notice: "You Can't Unfollow your self" }
-          end
+      respond_to do |format|
+        format.html { redirect_back fallback_location: all_user_url, notice: notice }
       end
-    else
-          respond_to do |format|
-            format.html { redirect_back fallback_location: all_user_url, notice: 'User not found' }
-          end
-    end
   end
 
 
   def my_followees_articles
+    # @followees=@current_user.followees
+    @articles=[]
     @followees=@current_user.followees
+    @followees.each do |followee|
+     followee.articles.each do |article|
+       @articles<<article
+     end
+    end
   end
 
   def my_followers_list

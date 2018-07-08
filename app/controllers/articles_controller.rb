@@ -67,14 +67,15 @@ class ArticlesController < ApplicationController
     if @article.likers.include? @current_user
         @article.likers.delete(@current_user)
         @article.count-=1
-        redirect_back fallback_location: article_path , notice: "Article #{@article.title} successfully removed from favourites."
+        notice = "Article #{@article.title} successfully removed from favourites."
     else
         @article.likers<<@current_user
         @article.count+=1
-        @article.save
-        redirect_back fallback_location: article_path , notice: "Article #{@article.title} successfully added to favourites."
-    end
-    @article.save  
+        notice = "Article #{@article.title} successfully added to favourites."
+      end
+    @article.save
+    redirect_back fallback_location: article_path , notice: notice
+  
   end
 
   private

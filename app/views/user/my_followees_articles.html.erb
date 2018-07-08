@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
   
-  <%@followees.each do |followee| %>
-  <%followee.articles.each do |article| %>
+  <%@articles.each do |article| %>
+ 
   <strong> Title: </strong><%=article.title%>  
   <br>
   <strong> content: </strong><%=article.content%> 
@@ -16,5 +16,4 @@
   <br>
   <strong>Favourite Count : </strong><%=article.count %>
   <hr> 
-  <%end%>
   <%end%>

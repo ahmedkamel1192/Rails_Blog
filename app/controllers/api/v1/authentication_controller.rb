@@ -5,7 +5,7 @@ class Api::V1::AuthenticationController < Api::V1::ApplicationController
     # return auth token once user is authenticated
   def authenticate
     auth_token =AuthenticateUser.new(auth_params[:email], auth_params[:password]).call
-   render json: {auth_token: auth_token}
+   render json: {auth_token: auth_token }
   end
 
   private
